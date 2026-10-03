@@ -6,7 +6,8 @@ export default function ConcreteMixTest() {
   
   // Common
   const [mixMode, setMixMode] = useState<'auto' | 'manual'>('auto');
-  const [macBetong, setMacBetong] = useState(250); // For ACI this is f'c
+  const [macBetong, setMacBetong] = useState(250); 
+  const [fcAci, setFcAci] = useState(30); // f'c cho ACI (MPa)
   const [doSut, setDoSut] = useState(8);
   const [dMax, setDMax] = useState(20);
   const [loaiDa, setLoaiDa] = useState<'da_dam' | 'soi'>('da_dam');
@@ -63,6 +64,7 @@ export default function ConcreteMixTest() {
     setStandard('QD778');
     setMixMode('auto');
     setMacBetong(250);
+    setFcAci(30);
     setDoSut(8);
     setDMax(20);
     setLoaiDa('da_dam');
@@ -178,7 +180,7 @@ export default function ConcreteMixTest() {
       C = (1000 - (X / rhoX + D / rhoD + N_chuan + PG / 1.1)) * rhoC;
     }
     else if (standard === 'ACI211') {
-      let fcr = macBetong <= 35 ? macBetong + 8.3 : 1.10 * macBetong + 5.0;
+      let fcr = fcAci <= 35 ? fcAci + 8.3 : 1.10 * fcAci + 5.0;
       rn = fcr;
 
       calcAir = isAirEntrained ? (exposure === 'severe' ? 6.0 : (exposure === 'moderate' ? 4.5 : 3.0)) : 1.5;
@@ -254,7 +256,7 @@ export default function ConcreteMixTest() {
 
     return { rn, result1m3, vMeTronLit, vMeTronM3, air: calcAir, errors: errorList };
   }, [
-    standard, mixMode, macBetong, macXimang, doSut, dMax, mDl, loaiDa, 
+    standard, mixMode, macBetong, fcAci, macXimang, doSut, dMax, mDl, loaiDa, 
     coPhuGia, lieuLuongPG, phanTramGiamNuoc, wc, wd, 
     rhoX, rhoC, rhoD, rhoVd, 
     wHutCat, isSandBlending, blendSandType, blendSandRatio,
@@ -366,7 +368,11 @@ export default function ConcreteMixTest() {
               <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">
                 {standard === 'ACI211' ? 'Cường độ nén f\'c (MPa)' : 'Mác bê tông M (MPa)'}
               </label>
-              <input type="number" value={macBetong} onChange={e => setMacBetong(Number(e.target.value))} className="w-full bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 rounded-xl p-2.5 outline-none text-sm text-slate-800 dark:text-slate-200" />
+              {standard === 'ACI211' ? (
+                <input type="number" value={fcAci} onChange={e => setFcAci(Number(e.target.value))} className="w-full bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 rounded-xl p-2.5 outline-none text-sm text-slate-800 dark:text-slate-200" />
+              ) : (
+                <input type="number" value={macBetong} onChange={e => setMacBetong(Number(e.target.value))} className="w-full bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 rounded-xl p-2.5 outline-none text-sm text-slate-800 dark:text-slate-200" />
+              )}
             </div>
             {standard !== 'ACI211' && (
               <div>
