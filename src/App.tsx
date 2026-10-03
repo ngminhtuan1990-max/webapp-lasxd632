@@ -33,14 +33,14 @@ function App() {
   }, [isDark]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-emerald-50 dark:from-slate-900 dark:via-purple-950/40 dark:to-slate-900 py-8 px-2 md:px-4 relative overflow-hidden font-sans transition-colors duration-500">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-emerald-50 dark:from-slate-900 dark:via-purple-950/40 dark:to-slate-900 py-8 px-2 md:px-4 relative overflow-hidden font-sans transition-colors duration-500 print:bg-none print:p-0">
       
       {/* Decorative background blobs */}
-      <div className="absolute top-0 left-10 w-96 h-96 bg-purple-300 dark:bg-purple-900/40 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-[80px] opacity-40 animate-blob"></div>
-      <div className="absolute top-0 right-10 w-96 h-96 bg-cyan-300 dark:bg-cyan-900/40 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-[80px] opacity-40 animate-blob animation-delay-2000"></div>
-      <div className="absolute -bottom-32 left-1/2 w-96 h-96 bg-blue-300 dark:bg-blue-900/40 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-[80px] opacity-40 animate-blob animation-delay-4000"></div>
+      <div className="absolute top-0 left-10 w-96 h-96 bg-purple-300 dark:bg-purple-900/40 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-[80px] opacity-40 animate-blob print:hidden"></div>
+      <div className="absolute top-0 right-10 w-96 h-96 bg-cyan-300 dark:bg-cyan-900/40 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-[80px] opacity-40 animate-blob animation-delay-2000 print:hidden"></div>
+      <div className="absolute -bottom-32 left-1/2 w-96 h-96 bg-blue-300 dark:bg-blue-900/40 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-[80px] opacity-40 animate-blob animation-delay-4000 print:hidden"></div>
 
-      <div className="max-w-4xl mx-auto mb-8 relative z-10">
+      <div className="max-w-4xl mx-auto mb-8 relative z-10 print:hidden">
         
         {/* App Title */}
         <div className="text-center mb-8 relative flex items-center justify-center">
