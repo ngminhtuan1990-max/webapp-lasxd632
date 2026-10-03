@@ -323,7 +323,7 @@ export default function ConcreteMixTest() {
         <div>
           <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-3">
             <Calculator className="w-7 h-7 text-blue-600 dark:text-blue-400" />
-            Cấp Phối Bê Tông PRO V3
+            Cấp Phối Bê Tông
           </h2>
           <p className="text-slate-500 dark:text-slate-400 mt-2">Hệ thống Multi-Standard Edition</p>
         </div>
