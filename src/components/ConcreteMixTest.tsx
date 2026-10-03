@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Settings2, Calculator, Beaker, RotateCcw, Layers, Printer, FileText } from 'lucide-react';
+import { Settings2, Calculator, Beaker, RotateCcw, Layers, Printer, FileText, ClipboardCheck } from 'lucide-react';
 
 export default function ConcreteMixTest() {
   const [standard, setStandard] = useState<'QD778' | 'TCVN10796' | 'TCVN9382' | 'ACI211'>('QD778');
