@@ -87,7 +87,7 @@ export default function ConcreteMixTest() {
     setSoLuongMau(6);
   };
 
-  const { rn, result1m3, vMeTronLit, vMeTronM3, air, errors } = useMemo(() => {
+  const { rn, result1m3, vMeTronLit, vMeTronM3, air, errors, bucket50kg } = useMemo(() => {
     let kFactor = mixMode === 'auto' ? 1.10 : 1.15;
     let rn = macBetong * kFactor;
     let errorList: string[] = [];
@@ -243,7 +243,15 @@ export default function ConcreteMixTest() {
     D_hh = D * (1 + wd / 100);
     N_hh = N_chuan - (C * wc / 100) - (D * wd / 100);
 
-    const result1m3 = { X, N_chuan, C, D, PG, SCM, C_hh, D_hh, N_hh, X_N };
+    let C1_hh = 0, C2_hh = 0;
+    if (isSandBlending) {
+      let r1 = blendSandRatio / 100;
+      let r2 = 1 - r1;
+      C1_hh = C * r1 * (1 + wc / 100);
+      C2_hh = C * r2 * (1 + wc / 100);
+    }
+
+    const result1m3 = { X, N_chuan, C, D, PG, SCM, C_hh, D_hh, N_hh, X_N, C1_hh, C2_hh };
 
     let vSingleM3 = 0.15 * 0.15 * 0.15;
     if (selectedKhuon === 'cube15') vSingleM3 = 0.15 * 0.15 * 0.15;
@@ -270,8 +278,8 @@ export default function ConcreteMixTest() {
       daThung: ((D_hh * k_50kg / gammaDa) * 1000) / dungTichThung,
       nuocThung: (N_hh * k_50kg) / dungTichThung,
       // For blend (if C1_hh is present)
-      cat1Thung: (isSandBlending && (result1m3 as any).C1_hh) ? (((result1m3 as any).C1_hh * k_50kg / gammaCat) * 1000) / dungTichThung : 0,
-      cat2Thung: (isSandBlending && (result1m3 as any).C2_hh) ? (((result1m3 as any).C2_hh * k_50kg / gammaCat) * 1000) / dungTichThung : 0,
+      cat1Thung: (isSandBlending && result1m3.C1_hh) ? ((result1m3.C1_hh * k_50kg / gammaCat) * 1000) / dungTichThung : 0,
+      cat2Thung: (isSandBlending && result1m3.C2_hh) ? ((result1m3.C2_hh * k_50kg / gammaCat) * 1000) / dungTichThung : 0,
     };
 
     return { rn, result1m3, vMeTronLit, vMeTronM3, air: calcAir, errors: errorList, bucket50kg };
