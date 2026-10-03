@@ -7,7 +7,8 @@ import SteelTensileTest from './components/SteelTensileTest'
 import ElasticModulusTest from './components/ElasticModulusTest'
 import ConcreteCompressiveTest from './components/ConcreteCompressiveTest'
 import MortarStrengthTest from './components/MortarStrengthTest'
-import { FlaskConical, Cylinder, Filter, List, Wrench, Activity, Sun, Moon, Box, Layers } from 'lucide-react';
+import ConcreteMixTest from './components/ConcreteMixTest'
+import { FlaskConical, Cylinder, Filter, List, Wrench, Activity, Sun, Moon, Box, Layers, Droplet } from 'lucide-react';
 
 function App() {
   const [activeTab, setActiveTab] = useState('sand-cone');
@@ -160,6 +161,18 @@ function App() {
             <Layers className="w-5 h-5 flex-shrink-0" />
             <span className="text-xs sm:text-sm">Uốn Nén Vữa</span>
           </button>
+
+          <button 
+            onClick={() => setActiveTab('concrete-mix')}
+            className={`flex flex-col lg:flex-row items-center justify-center gap-1.5 lg:gap-2 py-3 px-2 rounded-xl font-medium transition-all duration-300 text-center ${
+              activeTab === 'concrete-mix' 
+                ? 'bg-white/80 dark:bg-slate-700/80 text-cyan-700 dark:text-cyan-400 shadow-md ring-1 ring-white/50 dark:ring-slate-600/50 backdrop-blur-md' 
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40'
+            }`}
+          >
+            <Droplet className="w-5 h-5 flex-shrink-0" />
+            <span className="text-xs sm:text-sm">Cấp Phối Bê Tông</span>
+          </button>
         </div>
       </div>
       
@@ -172,6 +185,7 @@ function App() {
         {activeTab === 'steel-tensile' && <SteelTensileTest />}
         {activeTab === 'concrete-compressive' && <ConcreteCompressiveTest />}
         {activeTab === 'mortar-strength' && <MortarStrengthTest />}
+        {activeTab === 'concrete-mix' && <ConcreteMixTest />}
       </div>
 
       {/* Footer Info */}
