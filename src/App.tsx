@@ -189,7 +189,7 @@ function App() {
       </div>
 
       {/* Footer Info */}
-      <div className="relative z-10 mt-12 pb-8 flex flex-col items-center">
+      <div className="relative z-10 mt-12 pb-8 flex flex-col items-center print:hidden">
         <img src="/logo.png" alt="Tứ Hữu Logo" className="h-12 w-auto mb-4 opacity-90 drop-shadow-sm bg-white/40 dark:bg-white/10 p-1.5 rounded-lg backdrop-blur-sm border border-white/30 dark:border-white/10" />
         <div className="text-center text-sm text-slate-500 dark:text-slate-400">
           <p className="font-bold text-slate-800 dark:text-slate-200 text-lg uppercase tracking-wide mb-1">
