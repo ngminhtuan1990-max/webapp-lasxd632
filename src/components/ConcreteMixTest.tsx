@@ -746,63 +746,65 @@ export default function ConcreteMixTest() {
         </div>
 
         {/* 1 Bao 50kg Section */}
-        <div className="bg-gradient-to-br from-cyan-900 to-blue-900 rounded-2xl p-4 sm:p-6 text-white shadow-xl mt-6 relative overflow-hidden print:hidden">
-          <h3 className="text-sm sm:text-base font-bold mb-4 flex items-center gap-2 relative z-10 text-cyan-200">
-            <ClipboardCheck className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
-            QUY ĐỔI TRỘN THỦ CÔNG (1 BAO XI MĂNG 50KG)
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 relative z-10">
-            <div className="bg-white/10 rounded-xl p-3 border border-white/20">
-              <label className="block text-[11px] text-cyan-200 mb-1">KLTT Xốp Cát (kg/m³)</label>
-              <input type="number" value={gammaCat} onChange={e => setGammaCat(Number(e.target.value))} className="w-full bg-transparent border-b border-white/30 text-white p-1 text-sm outline-none focus:border-cyan-400" />
+        {standard !== 'ACI211' && (
+          <div className="bg-gradient-to-br from-cyan-900 to-blue-900 rounded-2xl p-4 sm:p-6 text-white shadow-xl mt-6 relative overflow-hidden print:hidden">
+            <h3 className="text-sm sm:text-base font-bold mb-4 flex items-center gap-2 relative z-10 text-cyan-200">
+              <ClipboardCheck className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
+              QUY ĐỔI TRỘN THỦ CÔNG (1 BAO XI MĂNG 50KG)
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 relative z-10">
+              <div className="bg-white/10 rounded-xl p-3 border border-white/20">
+                <label className="block text-[11px] text-cyan-200 mb-1">KLTT Xốp Cát (kg/m³)</label>
+                <input type="number" value={gammaCat} onChange={e => setGammaCat(Number(e.target.value))} className="w-full bg-transparent border-b border-white/30 text-white p-1 text-sm outline-none focus:border-cyan-400" />
+              </div>
+              <div className="bg-white/10 rounded-xl p-3 border border-white/20">
+                <label className="block text-[11px] text-cyan-200 mb-1">KLTT Xốp Đá (kg/m³)</label>
+                <input type="number" value={gammaDa} onChange={e => setGammaDa(Number(e.target.value))} className="w-full bg-transparent border-b border-white/30 text-white p-1 text-sm outline-none focus:border-cyan-400" />
+              </div>
+              <div className="bg-white/10 rounded-xl p-3 border border-white/20">
+                <label className="block text-[11px] text-cyan-200 mb-1">Dung tích thùng (Lít)</label>
+                <input type="number" value={dungTichThung} onChange={e => setDungTichThung(Number(e.target.value))} className="w-full bg-transparent border-b border-white/30 text-white p-1 text-sm outline-none focus:border-cyan-400" />
+              </div>
             </div>
-            <div className="bg-white/10 rounded-xl p-3 border border-white/20">
-              <label className="block text-[11px] text-cyan-200 mb-1">KLTT Xốp Đá (kg/m³)</label>
-              <input type="number" value={gammaDa} onChange={e => setGammaDa(Number(e.target.value))} className="w-full bg-transparent border-b border-white/30 text-white p-1 text-sm outline-none focus:border-cyan-400" />
-            </div>
-            <div className="bg-white/10 rounded-xl p-3 border border-white/20">
-              <label className="block text-[11px] text-cyan-200 mb-1">Dung tích thùng (Lít)</label>
-              <input type="number" value={dungTichThung} onChange={e => setDungTichThung(Number(e.target.value))} className="w-full bg-transparent border-b border-white/30 text-white p-1 text-sm outline-none focus:border-cyan-400" />
-            </div>
-          </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 relative z-10">
-            <div className="bg-white/10 rounded-xl p-3 sm:p-4 border border-white/20 backdrop-blur-sm text-center">
-              <p className="text-xs text-cyan-200 mb-1 font-medium">Xi Măng</p>
-              <p className="text-lg sm:text-xl font-bold">1 <span className="text-xs font-normal">bao</span></p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 relative z-10">
+              <div className="bg-white/10 rounded-xl p-3 sm:p-4 border border-white/20 backdrop-blur-sm text-center">
+                <p className="text-xs text-cyan-200 mb-1 font-medium">Xi Măng</p>
+                <p className="text-lg sm:text-xl font-bold">1 <span className="text-xs font-normal">bao</span></p>
+              </div>
+              
+              {!isSandBlending ? (
+                <div className="bg-white/10 rounded-xl p-3 sm:p-4 border border-white/20 backdrop-blur-sm text-center">
+                  <p className="text-xs text-cyan-200 mb-1 font-medium">Cát</p>
+                  <p className="text-lg sm:text-xl font-bold">{bucket50kg.catThung.toFixed(2)} <span className="text-xs font-normal">thùng</span></p>
+                  <p className="text-[10px] text-cyan-100/70 mt-1">~ {bucket50kg.catLiters.toFixed(1)} lít</p>
+                </div>
+              ) : (
+                <div className="bg-white/10 rounded-xl p-3 sm:p-4 border border-white/20 backdrop-blur-sm text-center">
+                  <p className="text-xs text-cyan-200 mb-1 font-medium">Cát (Nghiền + Mịn)</p>
+                  <p className="text-base sm:text-lg font-bold">{bucket50kg.cat1Thung.toFixed(2)} <span className="text-xs font-normal">+</span> {bucket50kg.cat2Thung.toFixed(2)} <span className="text-[10px] font-normal">thùng</span></p>
+                  <p className="text-[10px] text-cyan-100/70 mt-1">~ {bucket50kg.catLiters.toFixed(1)} lít tổng</p>
+                </div>
+              )}
+
+              <div className="bg-white/10 rounded-xl p-3 sm:p-4 border border-white/20 backdrop-blur-sm text-center">
+                <p className="text-xs text-cyan-200 mb-1 font-medium">Đá</p>
+                <p className="text-lg sm:text-xl font-bold">{bucket50kg.daThung.toFixed(2)} <span className="text-xs font-normal">thùng</span></p>
+                <p className="text-[10px] text-cyan-100/70 mt-1">~ {bucket50kg.daLiters.toFixed(1)} lít</p>
+              </div>
+              <div className="bg-white/10 rounded-xl p-3 sm:p-4 border border-white/20 backdrop-blur-sm text-center">
+                <p className="text-xs text-cyan-200 mb-1 font-medium">Nước</p>
+                <p className="text-lg sm:text-xl font-bold">{bucket50kg.nuocThung.toFixed(2)} <span className="text-xs font-normal">thùng</span></p>
+                <p className="text-[10px] text-cyan-100/70 mt-1">~ {bucket50kg.nuocLiters.toFixed(1)} lít</p>
+              </div>
             </div>
             
-            {!isSandBlending ? (
-              <div className="bg-white/10 rounded-xl p-3 sm:p-4 border border-white/20 backdrop-blur-sm text-center">
-                <p className="text-xs text-cyan-200 mb-1 font-medium">Cát</p>
-                <p className="text-lg sm:text-xl font-bold">{bucket50kg.catThung.toFixed(2)} <span className="text-xs font-normal">thùng</span></p>
-                <p className="text-[10px] text-cyan-100/70 mt-1">~ {bucket50kg.catLiters.toFixed(1)} lít</p>
-              </div>
-            ) : (
-              <div className="bg-white/10 rounded-xl p-3 sm:p-4 border border-white/20 backdrop-blur-sm text-center">
-                <p className="text-xs text-cyan-200 mb-1 font-medium">Cát (Nghiền + Mịn)</p>
-                <p className="text-base sm:text-lg font-bold">{bucket50kg.cat1Thung.toFixed(2)} <span className="text-xs font-normal">+</span> {bucket50kg.cat2Thung.toFixed(2)} <span className="text-[10px] font-normal">thùng</span></p>
-                <p className="text-[10px] text-cyan-100/70 mt-1">~ {bucket50kg.catLiters.toFixed(1)} lít tổng</p>
-              </div>
-            )}
-
-            <div className="bg-white/10 rounded-xl p-3 sm:p-4 border border-white/20 backdrop-blur-sm text-center">
-              <p className="text-xs text-cyan-200 mb-1 font-medium">Đá</p>
-              <p className="text-lg sm:text-xl font-bold">{bucket50kg.daThung.toFixed(2)} <span className="text-xs font-normal">thùng</span></p>
-              <p className="text-[10px] text-cyan-100/70 mt-1">~ {bucket50kg.daLiters.toFixed(1)} lít</p>
-            </div>
-            <div className="bg-white/10 rounded-xl p-3 sm:p-4 border border-white/20 backdrop-blur-sm text-center">
-              <p className="text-xs text-cyan-200 mb-1 font-medium">Nước</p>
-              <p className="text-lg sm:text-xl font-bold">{bucket50kg.nuocThung.toFixed(2)} <span className="text-xs font-normal">thùng</span></p>
-              <p className="text-[10px] text-cyan-100/70 mt-1">~ {bucket50kg.nuocLiters.toFixed(1)} lít</p>
-            </div>
+            {/* Background decorations */}
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
+            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-cyan-400/10 rounded-full blur-2xl"></div>
           </div>
-          
-          {/* Background decorations */}
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
-          <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-cyan-400/10 rounded-full blur-2xl"></div>
-        </div>
+        )}
 
         {/* Print Only Signatures */}
         <div className="hidden print:flex justify-between mt-16 text-center text-sm">
