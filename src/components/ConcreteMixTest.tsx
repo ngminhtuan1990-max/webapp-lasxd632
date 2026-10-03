@@ -25,7 +25,7 @@ export default function ConcreteMixTest() {
   const [rhoX, setRhoX] = useState(3.1);
   const [rhoC, setRhoC] = useState(2.65);
   const [rhoD, setRhoD] = useState(2.70);
-  const [rhoVd, setRhoVd] = useState(42);
+  const [rhoVd, setRhoVd] = useState(1450);
 
   // States cho Cấp phối thủ công
   const [gammaCat, setGammaCat] = useState(1450); // Khối lượng thể tích xốp Cát kg/m3
